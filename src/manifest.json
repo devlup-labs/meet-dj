@@ -1,16 +1,23 @@
 {
-  "name":"Meet-Dj",
-  "version":"1.0",
-  "manifest_version":2,
-  "content_scripts":[
+  "name": "Meet-Dj",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Meet-Dj"
+  },
+  "background": {
+    "service_worker": "background-wrapper.js"
+  },
+  "content_scripts": [
     {
-    "matches":["<all_urls>"],
-    "js":["index.js"]
+      "matches": ["https://google.com/*"],
+      "js": ["content.js"]
     }
   ],
-  "browser_action":{
-    "default_popup":"popup.html",
-    "default_title":"Meet-Dj"
-  }
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "permissions": ["scripting"],
+  "host_permissions": ["https://google.com/"]
 }
-
